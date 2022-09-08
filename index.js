@@ -1,73 +1,46 @@
-/* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details
-   Complete the below for code reviewers' convenience:
+class Inhabitants {
+   constructor(species, name, gender, saying) {
+      this.species = species;
+      this.name = name;
+      this.gender = gender;
+      this.saying = saying;
+   }
+   info() {
+      return (this.species + ';' + this.name + ';' + this.gender + ';' + this.saying);
+   }
+};
 
-   Code repository: _put repo URL here_
-   Web app: _put project's github pages URL here_
-   */
+class People extends Inhabitants {
+   constructor(species, name, gender, legs, hands, saying) {
+      super(species, name, gender, saying);
+      this.legs = legs;
+      this.hands = hands;
+   }
+   info() {
+      return super.info() + ';' + this.legs + ';' + this.hands;
+   }
+};
 
-// ======== OBJECTS DEFINITIONS ========
-// Define your objects here
-const inhabitants = [
-   {
-      species: 'dog',
-      name: 'Toby',
-      gender: 'male',
-      legs: 4,
-      hands: 0,
-      saying: 'woof-woof!'
-   },
-   {
-      species: 'cat',
-      name: 'Zhorik',
-      gender: 'male',
-      legs: 4,
-      hands: 0,
-      saying: 'moooow!'
-   },
-   {
-      species: 'woman',
-      name: 'Kate',
-      gender: 'female',
-      legs: 2,
-      hands: 2,
-      saying: 'What did you say?'
-   },
-   {
-      species: 'man',
-      name: 'John',
-      gender: 'male',
-      legs: 2,
-      hands: 2,
-      saying: 'Im fine.'
-   },
+class Animals extends Inhabitants {
+   constructor(species, name, gender, paws, saying) {
+      super(species, name, gender, saying);
+      this.paws = paws;
 
-];
-// ======== OUTPUT ========
-/* Use print(message) for output.
-   Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
+   }
+   info() {
+      return super.info() + ';' + this.paws + ';';
+   }
+};
 
-   Message can contain HTML markup. You may also tweak index.html and/or styles.css.
-   However, please, REFRAIN from improving visuals at least until your code is reviewed
-   so code reviewers might focus on a single file that is index.js.
-   */
 
-/* Print examples:
-   print('ABC');
-   print('<strong>ABC</strong>');
-   print('<strong>ABC</strong>', 'div');
+let toby = new Animals('dog', 'Toby', 'male', '4', 'woof-woof');
+let zhorik = new Animals('cat', 'Zhorik', 'male', '4', 'moooow!');
+let kate = new People('woman', 'Kate', 'female', '2', '2', 'What did you say?');
+let john = new People('man', 'John', 'male', '2', '2', 'Im fine.');
 
-   print('human; John; male; 2; 2; Hello world!; Rex, Tom, Jenny');
-   print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
-   print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
-   */
+let city = [toby, zhorik, kate, john];
 
-for (let i = 0; i < inhabitants.length; i++) {
-   let species = inhabitants[i].species;
-   let name = inhabitants[i].name;
-   let gender = inhabitants[i].gender;
-   let legs = inhabitants[i].legs;
-   let hands = inhabitants[i].hands;
-   let saying = inhabitants[i].saying;
+city.map((city) => {
+   print(city.info());
+});
 
-   print(`${species}; <strong>${name}</strong>; ${gender}; ${legs}; ${hands}; <em>${saying}</em>`);
-}
